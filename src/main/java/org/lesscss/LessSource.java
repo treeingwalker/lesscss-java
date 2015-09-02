@@ -37,7 +37,7 @@ import org.lesscss.logging.LessLoggerFactory;
  */
 public class LessSource {
 
-    private static LessLogger logger = LessLoggerFactory.getLogger( LessSource.class );
+    private static final LessLogger logger = LessLoggerFactory.getLogger( LessSource.class );
 
     /**
      * The <code>Pattern</code> used to match imported files.
@@ -47,7 +47,7 @@ public class LessSource {
     private Resource resource;
     private String content;
     private String normalizedContent;
-    private Map<String, LessSource> imports = new LinkedHashMap<String, LessSource>();
+    private final Map<String, LessSource> imports = new LinkedHashMap<>();
 
     /**
      * Constructs a new <code>LessSource</code>.
@@ -97,23 +97,19 @@ public class LessSource {
      *
      * @throws IOException
      */
-    public LessSource(File input) throws IOException {
+    private LessSource(File input) throws IOException {
         this( new FileResource(input) );
     }
 
     private String loadResource(Resource resource, Charset charset) throws IOException {
-        BOMInputStream inputStream = new BOMInputStream( resource.getInputStream() );
-        try {
-            if( inputStream.hasBOM() ) {
+        try (BOMInputStream inputStream = new BOMInputStream(resource.getInputStream())) {
+            if (inputStream.hasBOM()) {
                 logger.debug("BOM found %s", inputStream.getBOMCharsetName());
                 return IOUtils.toString(inputStream, inputStream.getBOMCharsetName());
             } else {
                 logger.debug("Using charset " + charset.name());
                 return IOUtils.toString(inputStream, charset.name());
             }
-        }
-        finally {
-            inputStream.close();
         }
     }
 

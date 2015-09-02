@@ -61,6 +61,7 @@ import org.mozilla.javascript.tools.shell.Global;
  * @see <a href="http://www.mozilla.org/rhino/">Rhino - JavaScript for Java</a>
  * @see <a href="http://www.envjs.com/">Envjs - Bringing the Browser</a>
  */
+@SuppressWarnings("FeatureEnvy")
 public class LessCompiler {
 
     private static final LessLogger logger = LessLoggerFactory.getLogger(LessCompiler.class);
@@ -86,7 +87,7 @@ public class LessCompiler {
      * Constructs a new <code>LessCompiler</code>.
      */
     public LessCompiler(List<String> options) {
-    	this.options = new ArrayList<String>(options);
+    	this.options = new ArrayList<>(options);
     }
     
     public List<String> getOptions() {
@@ -98,7 +99,7 @@ public class LessCompiler {
             throw new IllegalStateException("This method can only be called before init()");
         }
 		
-		this.options = new ArrayList<String>(options);
+		this.options = new ArrayList<>(options);
 	}
 
 	/**
@@ -116,7 +117,8 @@ public class LessCompiler {
      * 
      * @param envJs The Envjs JavaScript file used by the compiler.
      */
-    public synchronized void setEnvJs(URL envJs) {
+    @Deprecated
+    public synchronized void setEnvJs(@SuppressWarnings("UnusedParameters") URL envJs) {
     	throw new IllegalArgumentException("EnvJs is no longer supported.  You don't need this if you use a less-rhino-<version>.js build like the default.");
     }
     
@@ -197,7 +199,7 @@ public class LessCompiler {
             throw new IllegalStateException("This method can only be called before init()");
         }
     	// copy the list so there's no way for anyone else who holds a reference to the list to modify it
-        this.customJs = new ArrayList<URL>(customJs);
+        this.customJs = new ArrayList<>(customJs);
     }
     
     /**
@@ -206,7 +208,7 @@ public class LessCompiler {
      * @return Whether the compiler will compress the CSS.
      */
     public boolean isCompress() {
-        return (compress != null && compress.booleanValue()) ||
+        return (compress != null && compress) ||
         		options.contains("compress") ||
         		options.contains("x");
     }
@@ -270,7 +272,7 @@ public class LessCompiler {
             global.setOut(new PrintStream(out));
             
             // Combine all of the streams (less, custom, lessc) into one big stream
-            List<InputStream> streams = new ArrayList<InputStream>();
+            List<InputStream> streams = new ArrayList<>();
             
             // less should be first
             streams.add(lessJs.openConnection().getInputStream());
@@ -321,7 +323,7 @@ public class LessCompiler {
      *
      * @throws LessException any error encountered by the compiler
      */
-    public String compile(String input, String name) throws LessException {
+    private String compile(String input, String name) throws LessException {
     	File tempFile = null;
     	try {
 	        tempFile = File.createTempFile("tmp", "less.tmp");
@@ -332,7 +334,10 @@ public class LessCompiler {
             throw new LessException(e);
     		
     	} finally {
-    		tempFile.delete();
+            assert tempFile != null;
+            //noinspection ResultOfMethodCallIgnored
+            tempFile.delete();
+
     	}
     }
 
@@ -346,7 +351,7 @@ public class LessCompiler {
      *
      * @throws LessException any error encountered by the compiler
      */
-    public synchronized String compile(File input, String name) throws LessException {
+    private synchronized String compile(File input, String name) throws LessException {
         if (scope == null) {
             init();
         }
@@ -365,12 +370,12 @@ public class LessCompiler {
         	compileScope.setParentScope(null);
 
         	// Copy the default options
-        	List<String> options = new ArrayList<String>(this.options);
+        	List<String> options = new ArrayList<>(this.options);
         	// Set up the arguments for <input>
         	options.add(input.getAbsolutePath());
         	
         	// Add compress if the value is set for backward compatibility
-        	if (this.compress != null && this.compress.booleanValue()) {
+        	if (this.compress != null && this.compress) {
         		options.add("-x");
         	}
         	
@@ -411,13 +416,11 @@ public class LessCompiler {
                     }
 
                     if( ScriptableObject.hasProperty(value, "extract") ) {
-                        List<String> lines = (List<String>) ScriptableObject.getProperty(value, "extract");
-                        for( String line : lines ) {
-                            if( line != null ) {
-                                message.append("\n");
-                                message.append( line );
-                            }
-                        }
+                        @SuppressWarnings("unchecked") List<String> lines = (List<String>) ScriptableObject.getProperty(value, "extract");
+                        lines.stream().filter(line -> line != null).forEach(line -> {
+                            message.append("\n");
+                            message.append(line);
+                        });
                     }
 
                     throw new LessException(message.toString(), e);
@@ -440,7 +443,8 @@ public class LessCompiler {
      * @return The CSS.
      * @throws IOException If the LESS file cannot be read.
      */
-    public String compile(File input) throws IOException, LessException {
+    @SuppressWarnings("JavaDoc")
+    public String compile(File input) throws LessException {
         return compile(input, input.getName());
     }
     

@@ -11,7 +11,7 @@ public class Compile {
 
     private static final LessLogger logger = LessLoggerFactory.getLogger( Compile.class );
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String... args) throws Exception {
 		if( args.length < 1 ) {
 		    logger.info("usage: org.lesscss.Compile <args> <less_filename>");
             System.exit(-1);

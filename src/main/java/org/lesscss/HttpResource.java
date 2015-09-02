@@ -9,13 +9,13 @@ import java.net.URLConnection;
 
 public class HttpResource implements Resource {
 
-    URI url;
+    private URI url;
 
     public HttpResource(String url) throws URISyntaxException {
         this.url = new URI( url );
     }
 
-    public HttpResource(URI url) {
+    private HttpResource(URI url) {
         this.url = url;
     }
 

@@ -1,7 +1,7 @@
 package org.lesscss.logging;
 
 public class LessLoggerFactory {
-    private static LessLoggerFactory instance = new LessLoggerFactory();
+    private static final LessLoggerFactory instance = new LessLoggerFactory();
     private LessLoggerProvider loggerProvider;
 
     private LessLoggerFactory() {

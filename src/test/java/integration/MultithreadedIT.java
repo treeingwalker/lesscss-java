@@ -42,17 +42,14 @@ public class MultithreadedIT extends AbstractCompileIT {
     	final int ITERATIONS = 5;
 		for(int i=0;i<ITERATIONS;i++){
 			for(final String filename : filenames){
-				new Thread(new Runnable() {
-					public void run() {
-						try{
-							testCompile(filename);
-							waiter.resume();
-						}catch(Throwable t){
-							waiter.fail(t);
-						}
-					}
-	
-				}).start();
+				new Thread(() -> {
+                    try{
+                        testCompile(filename);
+                        waiter.resume();
+                    }catch(Throwable t){
+                        waiter.fail(t);
+                    }
+                }).start();
 			}
 		}
 		waiter.await(60*1000, ITERATIONS * filenames.length);

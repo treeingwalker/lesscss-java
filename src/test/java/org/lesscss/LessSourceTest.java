@@ -19,9 +19,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.matchers.JUnitMatchers;
 import org.junit.runner.RunWith;
-import org.mockito.AdditionalMatchers;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -39,9 +38,9 @@ import java.util.Map;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.powermock.api.mockito.PowerMockito.*;
 
+@SuppressWarnings("deprecation")
 @PrepareForTest({FileUtils.class, IOUtils.class, LessSource.class, FileResource.class})
 @RunWith(PowerMockRunner.class)
 public class LessSourceTest {
@@ -62,7 +61,7 @@ public class LessSourceTest {
         
     @Before
     public void setUp() throws Exception {
-        imports = new LinkedHashMap<String, LessSource>();
+        imports = new LinkedHashMap<>();
         imports.put("import1", import1);
         imports.put("import2", import2);
         imports.put("import3", import3);
@@ -91,7 +90,7 @@ public class LessSourceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNewLessSourceFileNull() throws Exception {
-        lessSource = new LessSource((Resource)null);
+        lessSource = new LessSource(null);
     }
     
     @Test(expected = IOException.class)
@@ -131,13 +130,13 @@ public class LessSourceTest {
     @Test
     public void testUtf8EncodedLessFile() throws Exception {
         String content = readLessSourceWithEncoding("UTF-8");
-        assertThat(content, containsString("↓"));
+        assertThat(content, JUnitMatchers.containsString("↓"));
     }
 
     @Test
     public void testWithBadEncodingLessFile() throws Exception {
         String content = readLessSourceWithEncoding("ISO-8859-1");
-        assertThat(content, not(containsString("↓")));
+        assertThat(content, not(JUnitMatchers.containsString("↓")));
     }
 
     private String readLessSourceWithEncoding(String encoding) throws IOException, IllegalAccessException {
@@ -148,7 +147,7 @@ public class LessSourceTest {
     }
 
 
-    private void mockFile(boolean fileExists, String content, String absolutePath) throws Exception, IOException {
+    private void mockFile(boolean fileExists, String content, String absolutePath) throws Exception {
         when(file.exists()).thenReturn(fileExists);
         mockStatic(FileUtils.class);
         when(FileUtils.readFileToString(file)).thenReturn(content);

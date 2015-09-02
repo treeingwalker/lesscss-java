@@ -6,3 +6,4 @@
 *.ipr
 target/
 dependency-reduced-pom.xml
+*.class

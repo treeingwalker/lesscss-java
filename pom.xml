@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.lesscss</groupId>
-    <artifactId>lesscss</artifactId>
-    <version>1.4.1-SNAPSHOT</version>
+    <groupId>org.treeingwalker</groupId>
+    <artifactId>unlesscss</artifactId>
+    <version>1.4.1</version>
     <packaging>jar</packaging>
-    <name>Official LESS CSS Compiler for Java</name>
+    <name>unOfficial LESS CSS Compiler for Java</name>
     <description>Official LESS CSS Compiler for Java</description>
-    <url>http://github.com/marceloverdijk/lesscss-java</url>
+    <url>http://github.com/treeingwalker/lesscss-java</url>
     
     <!--<parent>
         <groupId>org.sonatype.oss</groupId>
@@ -113,7 +113,7 @@
                     <charset>UTF-8</charset>
                     <stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile>
                 </configuration>
-                <executions>
+                <!--<executions>
                     <execution>
                         <id>sources-jar</id>
                         <phase>package</phase>
@@ -121,7 +121,7 @@
                             <goal>jar</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions>-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -137,26 +137,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <version>1.8</version>
-                <executions>
-                    <execution>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                        <signature>
-                            <groupId>org.codehaus.mojo.signature</groupId>
-                            <artifactId>java15</artifactId>
-                            <version>1.0</version>
-                        </signature>
-                </configuration>
-                </plugin>
+
         </plugins>
     </build>
     
@@ -170,45 +151,26 @@
     
     <developers>
         <developer>
-            <id>marceloverdijk</id>
-            <name>Marcel Overdijk</name>
-            <email>marcel@overdijk.me</email>
+            <id>treeingwalker</id>
+            <name>Tadish Durbin</name>
+            <email>tcdurbin@outlook.com</email>
             <roles>
                 <role>Lead Developer</role>
             </roles>
-            <timezone>+2</timezone>
+            <timezone>-8</timezone>
         </developer>
-        <developer>
-            <id>candrews</id>
-            <name>Craig Andrews</name>
-            <email>candrews@integralblue.com</email>
-            <url>http://candrews.integralblue.com</url>
-            <roles>
-                <role>Developer</role>
-            </roles>
-            <timezone>-5</timezone>
-        </developer>
-        <developer>
-            <id>cpopov</id>
-            <name>Christophe Popov</name>
-            <email>chrpopov.gmail.com</email>
-            <url>http://uk.linkedin.com/in/hpopov/</url>
-            <roles>
-                <role>Developer</role>
-            </roles>
-            <timezone>0</timezone>
-        </developer>
+
     </developers>
     
     <issueManagement>
         <system>GitHub</system>
-        <url>http://github.com/marceloverdijk/lesscss-java/issues</url>
+        <url>http://github.com/treeingwalker/lesscss-java/issues</url>
     </issueManagement>
     
     <scm>
-        <connection>scm:git:git@github.com:marceloverdijk/lesscss-java.git</connection>
-        <developerConnection>scm:git:git@github.com:marceloverdijk/lesscss-java.git</developerConnection>
-        <url>http://github.com/marceloverdijk/lesscss-java</url>
+        <connection>scm:git:git@github.com:treeingwalker/lesscss-java.git</connection>
+        <developerConnection>scm:git:git@github.com:treeingwalker/lesscss-java.git</developerConnection>
+        <url>http://github.com/treeingwalker/lesscss-java</url>
     </scm>
     
 </project>

@@ -14,16 +14,15 @@
  */
 package integration;
 
-import static org.junit.Assert.assertEquals;
+import org.apache.commons.io.FileUtils;
+import org.junit.Before;
+import org.treeingwalker.LessCompiler;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.Before;
-
-import org.lesscss.LessCompiler;
+import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractCompileIT {
 

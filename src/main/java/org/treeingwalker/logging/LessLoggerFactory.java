@@ -1,4 +1,4 @@
-package org.lesscss.logging;
+package org.treeingwalker.logging;
 
 public class LessLoggerFactory {
     private static final LessLoggerFactory instance = new LessLoggerFactory();

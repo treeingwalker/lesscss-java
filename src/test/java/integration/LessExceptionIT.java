@@ -14,10 +14,10 @@
  */
 package integration;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-import org.lesscss.LessException;
+import org.treeingwalker.LessException;
+
+import static org.junit.Assert.assertTrue;
 
 public class LessExceptionIT extends AbstractCompileIT {
 

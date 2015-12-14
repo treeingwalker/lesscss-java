@@ -12,29 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lesscss;
+package org.treeingwalker;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.io.SequenceInputStream;
+import org.apache.commons.io.FileUtils;
+import org.mozilla.javascript.*;
+import org.mozilla.javascript.tools.shell.Global;
+import org.treeingwalker.logging.LessLogger;
+import org.treeingwalker.logging.LessLoggerFactory;
+
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import org.apache.commons.io.FileUtils;
-import org.lesscss.logging.LessLogger;
-import org.lesscss.logging.LessLoggerFactory;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.JavaScriptException;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
-import org.mozilla.javascript.tools.shell.Global;
 
 /**
  * The LESS compiler to compile LESS sources to CSS stylesheets.

@@ -1,7 +1,7 @@
-package org.lesscss;
+package org.treeingwalker;
 
-import org.lesscss.logging.LessLogger;
-import org.lesscss.logging.LessLoggerFactory;
+import org.treeingwalker.logging.LessLogger;
+import org.treeingwalker.logging.LessLoggerFactory;
 
 import java.io.File;
 import java.util.Arrays;

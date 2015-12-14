@@ -1,4 +1,4 @@
-package org.lesscss.logging;
+package org.treeingwalker.logging;
 
 class SLF4JLessLoggerProvider implements LessLoggerProvider {
     public LessLogger getLogger(Class<?> clazz) {

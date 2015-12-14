@@ -1,4 +1,4 @@
 /**
  * Provides classes for compiling LESS sources.
  */
-package org.lesscss;
+package org.treeingwalker;

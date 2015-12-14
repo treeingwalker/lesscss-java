@@ -1,4 +1,4 @@
-package org.lesscss.logging;
+package org.treeingwalker.logging;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

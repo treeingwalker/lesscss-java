@@ -1,4 +1,4 @@
-package org.lesscss.logging;
+package org.treeingwalker.logging;
 
 public interface LessLogger {
     boolean isDebugEnabled();

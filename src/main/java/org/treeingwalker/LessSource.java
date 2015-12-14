@@ -12,7 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lesscss;
+package org.treeingwalker;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.BOMInputStream;
+import org.treeingwalker.logging.LessLogger;
+import org.treeingwalker.logging.LessLoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,12 +28,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static java.util.regex.Pattern.MULTILINE;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.input.BOMInputStream;
-import org.lesscss.logging.LessLogger;
-import org.lesscss.logging.LessLoggerFactory;
+import static java.util.regex.Pattern.MULTILINE;
 
 /**
  * Represents the metadata and content of a LESS source.

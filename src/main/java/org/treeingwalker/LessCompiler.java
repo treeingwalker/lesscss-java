@@ -29,27 +29,35 @@ import java.util.List;
 /**
  * The LESS compiler to compile LESS sources to CSS stylesheets.
  * <p>
- * The compiler uses Rhino (JavaScript implementation written in Java), Envjs 
- * (simulated browser environment written in JavaScript), and the official LESS 
- * JavaScript compiler.<br />
- * Note that the compiler is not a Java implementation of LESS itself, but rather 
- * integrates the LESS JavaScript compiler within a Java/JavaScript browser 
+ * The compiler uses Rhino (JavaScript implementation written in Java), Envjs
+ * (simulated browser environment written in JavaScript), and the official LESS
+ * JavaScript compiler.</p>
+ * <p>
+ * Note that the compiler is not a Java implementation of LESS itself, but rather
+ * integrates the LESS JavaScript compiler within a Java/JavaScript browser
  * environment provided by Rhino and Envjs.
  * </p>
  * <p>
- * The compiler comes bundled with the Envjs and LESS JavaScript, so there is 
+ * The compiler comes bundled with the Envjs and LESS JavaScript, so there is
  * no need to include them yourself. But if needed they can be overridden.
  * </p>
- * <h4>Basic code example:</h4>
+ * <p>Basic code example:</p>
  * <pre>
  * LessCompiler lessCompiler = new LessCompiler();
  * String css = lessCompiler.compile("@color: #4D926F; #header { color: @color; }");
  * </pre>
- * 
+ *
  * @author Marcel Overdijk
  * @see <a href="http://lesscss.org/">LESS - The Dynamic Stylesheet language</a>
  * @see <a href="http://www.mozilla.org/rhino/">Rhino - JavaScript for Java</a>
  * @see <a href="http://www.envjs.com/">Envjs - Bringing the Browser</a>
+ * @see <a href="http://lesscss.org/">LESS - The Dynamic Stylesheet language</a>
+ * @see <a href="http://www.mozilla.org/rhino/">Rhino - JavaScript for Java</a>
+ * @see <a href="http://www.envjs.com/">Envjs - Bringing the Browser</a>
+ * @see <a href="http://lesscss.org/">LESS - The Dynamic Stylesheet language</a>
+ * @see <a href="http://www.mozilla.org/rhino/">Rhino - JavaScript for Java</a>
+ * @see <a href="http://www.envjs.com/">Envjs - Bringing the Browser</a>
+ * @version $Id: $
  */
 @SuppressWarnings("FeatureEnvy")
 public class LessCompiler {
@@ -75,15 +83,27 @@ public class LessCompiler {
     
     /**
      * Constructs a new <code>LessCompiler</code>.
+     *
+     * @param options the various compiler options
      */
     public LessCompiler(List<String> options) {
     	this.options = new ArrayList<>(options);
     }
     
+    /**
+     * <p>Getter for the field <code>options</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<String> getOptions() {
 		return Collections.unmodifiableList(options);
 	}
 
+	/**
+	 * <p>Setter for the field <code>options</code>.</p>
+	 *
+	 * @param options a {@link java.util.List} object.
+	 */
 	public void setOptions(List<String> options) {
         if (scope != null) {
             throw new IllegalStateException("This method can only be called before init()");
@@ -92,9 +112,9 @@ public class LessCompiler {
 		this.options = new ArrayList<>(options);
 	}
 
-	/**
+    /**
      * Returns the Envjs JavaScript file used by the compiler.
-     * 
+     *
      * @return The Envjs JavaScript file used by the compiler.
      */
     public URL getEnvJs() {
@@ -104,7 +124,7 @@ public class LessCompiler {
     /**
      * Sets the Envjs JavaScript file used by the compiler.
      * Must be set before {@link #init()} is called.
-     * 
+     *
      * @param envJs The Envjs JavaScript file used by the compiler.
      */
     @Deprecated
@@ -115,6 +135,7 @@ public class LessCompiler {
     /**
      * Returns the LESS JavaScript file used by the compiler.
      * COMPILE_STRING
+     *
      * @return The LESS JavaScript file used by the compiler.
      */
     public URL getLessJs() {
@@ -124,7 +145,7 @@ public class LessCompiler {
     /**
      * Sets the LESS JavaScript file used by the compiler.
      * Must be set before {@link #init()} is called.
-     * 
+     *
      * @param lessJs LESS JavaScript file used by the compiler.
      */
     public synchronized void setLessJs(URL lessJs) {
@@ -137,6 +158,7 @@ public class LessCompiler {
     /**
      * Returns the LESSC JavaScript file used by the compiler.
      * COMPILE_STRING
+     *
      * @return The LESSC JavaScript file used by the compiler.
      */
     public URL getLesscJs() {
@@ -146,7 +168,7 @@ public class LessCompiler {
     /**
      * Sets the LESSC JavaScript file used by the compiler.
      * Must be set before {@link #init()} is called.
-     * 
+     *
      * @param lesscJs LESSC JavaScript file used by the compiler.
      */
     public synchronized void setLesscJs(URL lesscJs) {
@@ -156,9 +178,9 @@ public class LessCompiler {
         this.lesscJs = lesscJs;
     }
     
-	/**
+    /**
      * Returns the custom JavaScript files used by the compiler.
-     * 
+     *
      * @return The custom JavaScript files used by the compiler.
      */
     public List<URL> getCustomJs() {
@@ -168,7 +190,7 @@ public class LessCompiler {
     /**
      * Sets a single custom JavaScript file used by the compiler.
      * Must be set before {@link #init()} is called.
-     * 
+     *
      * @param customJs A single custom JavaScript file used by the compiler.
      */
     public synchronized void setCustomJs(URL customJs) {
@@ -181,7 +203,7 @@ public class LessCompiler {
     /**
      * Sets the custom JavaScript files used by the compiler.
      * Must be set before {@link #init()} is called.
-     * 
+     *
      * @param customJs The custom JavaScript files used by the compiler.
      */
     public synchronized void setCustomJs(List<URL> customJs) {
@@ -193,8 +215,8 @@ public class LessCompiler {
     }
     
     /**
-     * Returns whether the compiler will compress the CSS. 
-     * 
+     * Returns whether the compiler will compress the CSS.
+     *
      * @return Whether the compiler will compress the CSS.
      */
     public boolean isCompress() {
@@ -206,7 +228,7 @@ public class LessCompiler {
     /**
      * Sets the compiler to compress the CSS.
      * Must be set before {@link #init()} is called.
-     * 
+     *
      * @param compress If <code>true</code>, sets the compiler to compress the CSS.
      */
     public synchronized void setCompress(boolean compress) {
@@ -218,7 +240,7 @@ public class LessCompiler {
     
     /**
      * Returns the character encoding used by the compiler when writing the output <code>File</code>.
-     * 
+     *
      * @return The character encoding used by the compiler when writing the output <code>File</code>.
      */
     public String getEncoding() {
@@ -229,7 +251,7 @@ public class LessCompiler {
      * Sets the character encoding used by the compiler when writing the output <code>File</code>.
      * If not set the platform default will be used.
      * Must be set before {@link #init()} is called.
-     * 
+     *
      * @param encoding character encoding used by the compiler when writing the output <code>File</code>.
      */
     public synchronized void setEncoding(String encoding) {
@@ -295,10 +317,11 @@ public class LessCompiler {
     }
     
     /**
-     * Compiles the LESS input <code>String</code> to CSS. 
-     * 
-     * @param input The LESS input <code>String</code> to compile. 
+     * Compiles the LESS input <code>String</code> to CSS.
+     *
+     * @param input The LESS input <code>String</code> to compile.
      * @return The CSS.
+     * @throws org.treeingwalker.LessException if any.
      */
     public String compile(String input) throws LessException {
     	return compile(input, "<inline>");
@@ -428,10 +451,10 @@ public class LessCompiler {
     
     /**
      * Compiles the LESS input <code>File</code> to CSS.
-     * 
+     *
      * @param input The LESS input <code>File</code> to compile.
      * @return The CSS.
-     * @throws IOException If the LESS file cannot be read.
+     * @throws org.treeingwalker.LessException if any.
      */
     @SuppressWarnings("JavaDoc")
     public String compile(File input) throws LessException {
@@ -440,10 +463,11 @@ public class LessCompiler {
     
     /**
      * Compiles the LESS input <code>File</code> to CSS and writes it to the specified output <code>File</code>.
-     * 
+     *
      * @param input The LESS input <code>File</code> to compile.
      * @param output The output <code>File</code> to write the CSS to.
-     * @throws IOException If the LESS file cannot be read or the output file cannot be written.
+     * @throws java.io.IOException If the LESS file cannot be read or the output file cannot be written.
+     * @throws org.treeingwalker.LessException if any.
      */
     public void compile(File input, File output) throws IOException, LessException {
         this.compile(input, output, true);
@@ -451,11 +475,12 @@ public class LessCompiler {
     
     /**
      * Compiles the LESS input <code>File</code> to CSS and writes it to the specified output <code>File</code>.
-     * 
+     *
      * @param input The LESS input <code>File</code> to compile.
      * @param output The output <code>File</code> to write the CSS to.
      * @param force 'false' to only compile the LESS input file in case the LESS source has been modified (including imports) or the output file does not exists.
-     * @throws IOException If the LESS file cannot be read or the output file cannot be written.
+     * @throws java.io.IOException If the LESS file cannot be read or the output file cannot be written.
+     * @throws org.treeingwalker.LessException if any.
      */
     public void compile(File input, File output, boolean force) throws IOException, LessException {
         if (force || !output.exists() || output.lastModified() < input.lastModified()) {
@@ -464,16 +489,24 @@ public class LessCompiler {
         }
     }    
     
+    /**
+     * <p>compile.</p>
+     *
+     * @param input a {@link org.treeingwalker.LessSource} object.
+     * @return a {@link java.lang.String} object.
+     * @throws org.treeingwalker.LessException if any.
+     */
     public String compile(LessSource input) throws LessException {
         return compile(input.getNormalizedContent(), input.getName());
     }
     
     /**
      * Compiles the input <code>LessSource</code> to CSS and writes it to the specified output <code>File</code>.
-     * 
+     *
      * @param input The input <code>LessSource</code> to compile.
      * @param output The output <code>File</code> to write the CSS to.
-     * @throws IOException If the LESS file cannot be read or the output file cannot be written.
+     * @throws java.io.IOException If the LESS file cannot be read or the output file cannot be written.
+     * @throws org.treeingwalker.LessException if any.
      */
     public void compile(LessSource input, File output) throws IOException, LessException {
         compile(input, output, true);
@@ -481,11 +514,12 @@ public class LessCompiler {
     
     /**
      * Compiles the input <code>LessSource</code> to CSS and writes it to the specified output <code>File</code>.
-     * 
+     *
      * @param input The input <code>LessSource</code> to compile.
      * @param output The output <code>File</code> to write the CSS to.
      * @param force 'false' to only compile the input <code>LessSource</code> in case the LESS source has been modified (including imports) or the output file does not exists.
-     * @throws IOException If the LESS file cannot be read or the output file cannot be written.
+     * @throws java.io.IOException If the LESS file cannot be read or the output file cannot be written.
+     * @throws org.treeingwalker.LessException if any.
      */
     public void compile(LessSource input, File output, boolean force) throws IOException, LessException {
         if (force || !output.exists() || output.lastModified() < input.getLastModifiedIncludingImports()) {

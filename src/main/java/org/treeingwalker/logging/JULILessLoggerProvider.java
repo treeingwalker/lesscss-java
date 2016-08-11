@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 class JULILessLoggerProvider implements LessLoggerProvider {
+    /** {@inheritDoc} */
     public LessLogger getLogger(Class<?> clazz) {
         return new JULILessLogger(Logger.getLogger(clazz.getName()));
     }

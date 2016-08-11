@@ -16,15 +16,16 @@ package org.treeingwalker;
 
 /**
  * An exception that provides information on a LESS compilation error.
- * 
+ *
  * @author Marcel Overdijk
+ * @version $Id: $
  */
 @SuppressWarnings("serial")
 public class LessException extends Exception {
 
     /**
      * Constructs a new <code>LessException</code>.
-     * 
+     *
      * @param cause The cause.
      */
     public LessException(Throwable cause) {
@@ -33,7 +34,7 @@ public class LessException extends Exception {
 
     /**
      * Constructs a new <code>LessException</code>.
-     * 
+     *
      * @param message The message.
      * @param cause The cause.
      */

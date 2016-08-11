@@ -10,6 +10,7 @@ import java.io.InputStream;
  * classpath resource, URL, etc.</p>
  *
  * @author Anton Pechinsky
+ * @version $Id: $
  */
 public interface Resource {
 
@@ -31,7 +32,8 @@ public interface Resource {
     /**
      * Returns resource input stream.
      *
-     * @throws IOException
+     * @throws java.io.IOException if any.
+     * @return a {@link java.io.InputStream} object.
      */
     InputStream getInputStream() throws IOException;
 
@@ -40,6 +42,7 @@ public interface Resource {
      *
      * @param relativeResourcePath String relative resource path
      * @return Resource relative resource
+     * @throws java.io.IOException if any.
      */
     Resource createRelative(String relativeResourcePath) throws IOException;
 

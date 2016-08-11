@@ -1,6 +1,7 @@
 package org.treeingwalker.logging;
 
 class SLF4JLessLoggerProvider implements LessLoggerProvider {
+    /** {@inheritDoc} */
     public LessLogger getLogger(Class<?> clazz) {
         return new SLF4JLessLogger(org.slf4j.LoggerFactory.getLogger(clazz));
     }

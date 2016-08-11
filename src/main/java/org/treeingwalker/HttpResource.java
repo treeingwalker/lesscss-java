@@ -7,10 +7,22 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * <p>HttpResource class.</p>
+ *
+ * @author tdurbin
+ * @version $Id: $
+ */
 public class HttpResource implements Resource {
 
     private URI url;
 
+    /**
+     * <p>Constructor for HttpResource.</p>
+     *
+     * @param url a {@link java.lang.String} object.
+     * @throws java.net.URISyntaxException if any.
+     */
     public HttpResource(String url) throws URISyntaxException {
         this.url = new URI( url );
     }
@@ -19,6 +31,11 @@ public class HttpResource implements Resource {
         this.url = url;
     }
 
+    /**
+     * <p>exists.</p>
+     *
+     * @return a boolean.
+     */
     public boolean exists() {
         try {
             URL u = url.toURL();
@@ -30,6 +47,11 @@ public class HttpResource implements Resource {
         }
     }
 
+    /**
+     * <p>lastModified.</p>
+     *
+     * @return a long.
+     */
     public long lastModified() {
         try {
             URL u = url.toURL();
@@ -40,10 +62,17 @@ public class HttpResource implements Resource {
         }
     }
 
+    /**
+     * <p>getInputStream.</p>
+     *
+     * @return a {@link java.io.InputStream} object.
+     * @throws java.io.IOException if any.
+     */
     public InputStream getInputStream() throws IOException {
         return url.toURL().openStream();
     }
 
+    /** {@inheritDoc} */
     public Resource createRelative(String relativeResourcePath) throws IOException {
         try {
             return new HttpResource(url.resolve(new URI(relativeResourcePath)));
@@ -52,6 +81,11 @@ public class HttpResource implements Resource {
         }
     }
 
+    /**
+     * <p>getName.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getName() {
         return url.toASCIIString();
     }

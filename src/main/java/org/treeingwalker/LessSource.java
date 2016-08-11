@@ -35,6 +35,7 @@ import static java.util.regex.Pattern.MULTILINE;
  * Represents the metadata and content of a LESS source.
  *
  * @author Marcel Overdijk
+ * @version $Id: $
  */
 public class LessSource {
 
@@ -61,7 +62,7 @@ public class LessSource {
      *
      * @param resource The <code>File</code> reference to the LESS source to read.
      * @throws FileNotFoundException If the LESS source (or one of its imports) could not be found.
-     * @throws IOException If the LESS source cannot be read.
+     * @throws java.io.IOException If the LESS source cannot be read.
      */
     public LessSource(Resource resource) throws IOException {
         this(resource, Charset.defaultCharset());
@@ -76,7 +77,7 @@ public class LessSource {
      * @param resource The <code>File</code> reference to the LESS resource to read.
      * @param charset charset used to read the less resource.
      * @throws FileNotFoundException If the LESS resource (or one of its imports) could not be found.
-     * @throws IOException If the LESS resource cannot be read.
+     * @throws java.io.IOException If the LESS resource cannot be read.
      */
     public LessSource(Resource resource, Charset charset) throws IOException {
         if (resource == null) {
@@ -239,6 +240,11 @@ public class LessSource {
         return builder.toString();
     }
 
+    /**
+     * <p>getName.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getName() {
         return resource.getName();
     }

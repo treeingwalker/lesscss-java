@@ -7,10 +7,22 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <p>Compile class.</p>
+ *
+ * @author tdurbin
+ * @version $Id: $
+ */
 public class Compile {
 
     private static final LessLogger logger = LessLoggerFactory.getLogger( Compile.class );
 
+	/**
+	 * <p>main.</p>
+	 *
+	 * @param args a {@link java.lang.String} object.
+	 * @throws java.lang.Exception if any.
+	 */
 	public static void main(String... args) throws Exception {
 		if( args.length < 1 ) {
 		    logger.info("usage: org.lesscss.Compile <args> <less_filename>");
